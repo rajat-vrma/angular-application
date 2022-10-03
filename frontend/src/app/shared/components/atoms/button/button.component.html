@@ -1,0 +1,8 @@
+<button
+  [class]="class"
+  [ngClass]="{ 'disable-cursor opacity05': disabledBtn }"
+  [type]="type"
+  (click)="handleOnClick()"
+  [disabled]="disabledBtn">
+  {{ name }}
+</button>

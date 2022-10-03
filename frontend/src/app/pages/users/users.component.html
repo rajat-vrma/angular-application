@@ -1,0 +1,40 @@
+<app-header></app-header>
+
+<div class="text-center mt-4">
+  <div>
+    <h1>Welcome to Users Screen</h1>
+  </div>
+
+  <app-button
+    [name]="'Add User'"
+    [class]="'btn btn-primary'"
+    (onClick)="onClickAddUser()"></app-button>
+</div>
+
+<app-table
+  [usersData]="users"
+  [handleEditDeleteAction]="handleUserActions"
+  [headers]="headers"
+  [shouldShowActions]="shouldShowActions"></app-table>
+
+<div
+  tabindex="-1"
+  role="dialog"
+  class="modal fade pr-0"
+  aria-hidden="true"
+  id="addUser_modal"
+  data-bs-keyboard="false"
+  data-bs-backdrop="static">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content dialog_content">
+      <div class="modal-body mdl_body">
+        <app-user-actions-modal
+          [data]="data"
+          (closeEvent)="closeModal()"
+          [shouldDeleteUser]="deleteUserInfo"
+          (performDeleteAction)="performDeleteAction($event)">
+        </app-user-actions-modal>
+      </div>
+    </div>
+  </div>
+</div>

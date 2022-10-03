@@ -1,0 +1,54 @@
+<div class="container-fluid bg-light">
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand">Made in India</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="''" routerLinkActive="active"
+              >Home</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              [routerLink]="'/users'"
+              routerLinkActive="active"
+              >User</a
+            >
+          </li>
+        </ul>
+        <!-- To-DO: isThemeProvider will updated once done in 'index.js:35' -->
+
+        <form role="button" [formGroup]="headerForm">
+          <div class="me-2">
+            <div class="d-flex align-items-center">
+              <label
+                class="icon-switcher"
+                data-js-icon-switcher="data-js-icon-switcher"
+                (change)="handleSelection($event)">
+                <input
+                  id="themeSelector"
+                  class="control"
+                  type="checkbox"
+                  formControlName="selectedTheme" />
+                <div class="peg"></div>
+                <div class="bg"></div>
+              </label>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </nav>
+</div>
