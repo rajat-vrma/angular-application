@@ -1,28 +1,28 @@
 # This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: Node.js CI
+name: CI
 
 on:
   push:
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
-    
+
 env:
   # Region
   AWS_REGION: ap-south-1
   # S3-bucket name
-  S3BUCKET: anglr-tava-test 
+  S3BUCKET: anglr-tava-test
 
 jobs:
   build:
 
     name: Build and deploy
     runs-on: ubuntu-latest
-    
+
     steps:
-    
+
     - uses: actions/checkout@v3
       name: Checkout Repository
 
@@ -31,28 +31,24 @@ jobs:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_ANGULAR }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_ANGULAR }}
         aws-region: ${{ env.AWS_REGION }}
-    
+
     - uses: actions/checkout@v3
     - name: Use Node.js
       uses: actions/setup-node@v3
       with:
         node-version: '16.14.x'
 
-    - name: Run npm install for frontend
-      working-directory: frontend
-      run: npm install
-      
-    - name: Run npm install for backend
-      working-directory: backend
+    - name: Run npm install
+      working-directory: ./
       run: npm install
 
     - name: Run cli packages for frontend
-      working-directory: frontend
+      working-directory: ./
       run: npm install -g @angular/cli
 
     - name: Run Build for frontend
-      working-directory: frontend
+      working-directory: ./
       run: ng build
-      
+
     - name: Deploy to S3 bucket
-      run: aws s3 sync ./frontend/dist s3://${{ env.S3BUCKET }}/
+      run: aws s3 sync ./dist s3://${{ env.S3BUCKET }}/
