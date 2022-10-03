@@ -11,7 +11,7 @@ env:
   # Region
   AWS_REGION: ap-south-1
   # S3-bucket name
-  S3BUCKET: angularappbucket
+  S3BUCKET: anglr-tava-test
 
 jobs:
   build:
