@@ -6,6 +6,8 @@ name: CI
 on:
   push:
     branches: [ "master" ]
+  pull_request:
+    types: [opened, synchronize, reopened]
 
 env:
   # Region
@@ -39,10 +41,10 @@ jobs:
     - name: Run npm install
       run: npm install
 
-    - name: Run cli packages for frontend
+    - name: Run cli packages
       run: npm install -g @angular/cli
 
-    - name: Run Build for frontend
+    - name: Run Build
       run: ng build
 
     - name: Deploy to S3 bucket
