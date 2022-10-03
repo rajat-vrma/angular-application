@@ -8,6 +8,12 @@ on:
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
+    
+env:
+  # Region
+  AWS_REGION: ap-south-1
+  # S3-bucket name
+  S3BUCKET: anglr-tava-test 
 
 jobs:
   build:
@@ -16,9 +22,19 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - uses: actions/checkout@v2
+    
+    - uses: actions/checkout@v3
+      name: Checkout Repository
+
+    - uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_ANGULAR }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_ANGULAR }}
+        aws-region: ${{ env.AWS_REGION }}
+    
+    - uses: actions/checkout@v3
     - name: Use Node.js
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@v3
       with:
         node-version: '16.14.x'
 
@@ -37,3 +53,6 @@ jobs:
     - name: Run Build for frontend
       working-directory: frontend
       run: ng build
+      
+    - name: Deploy to S3 bucket
+      run: aws s3 sync ./frontend/dist s3://${{ env.S3BUCKET }}/
