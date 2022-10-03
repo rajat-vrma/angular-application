@@ -39,15 +39,12 @@ jobs:
         node-version: '16.14.x'
 
     - name: Run npm install
-      working-directory: ./
       run: npm install
 
     - name: Run cli packages for frontend
-      working-directory: ./
       run: npm install -g @angular/cli
 
     - name: Run Build for frontend
-      working-directory: ./
       run: ng build
 
     - name: Deploy to S3 bucket
