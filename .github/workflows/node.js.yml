@@ -43,6 +43,9 @@ jobs:
 
     - name: Run cli packages
       run: npm install -g @angular/cli
+      
+    - name: Run test
+      run: npm rum test --if-present
 
     - name: Run Build
       run: ng build
