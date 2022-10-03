@@ -6,14 +6,12 @@ name: CI
 on:
   push:
     branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
 
 env:
   # Region
   AWS_REGION: ap-south-1
   # S3-bucket name
-  S3BUCKET: anglr-tava-test
+  S3BUCKET: angularappbucket
 
 jobs:
   build:
