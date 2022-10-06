@@ -64,22 +64,22 @@ jobs:
     - name: Deploy to S3 bucket
       run: aws s3 sync ./dist s3://${{ env.S3_BUCKET }}/
 
-  test: 
+#   test: 
     
-    name: Mocha Test
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Use Node.js
-        uses: actions/setup-node@v3
-        with:
-         node-version: '16.14.x'
+#     name: Mocha Test
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v3
+#       - name: Use Node.js
+#         uses: actions/setup-node@v3
+#         with:
+#          node-version: '16.14.x'
       
-      - name: Run npm install
-        run: npm install
+#       - name: Run npm install
+#         run: npm install
          
-      - name: Run cli packages
-        run: npm install -g @angular/cli   
+#       - name: Run cli packages
+#         run: npm install -g @angular/cli   
       
-      - name: Run Test
-        run: npm run test
+#       - name: Run Test
+#         run: npm run test
