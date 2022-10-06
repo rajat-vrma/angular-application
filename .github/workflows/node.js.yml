@@ -30,36 +30,58 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
+#   build:
+
+#     name: Build and deploy
+#     runs-on: ubuntu-latest
+
+#     steps:
+
+#     - uses: actions/checkout@v3
+#       name: Checkout Repository
+
+#     - uses: aws-actions/configure-aws-credentials@v1
+#       with:
+#         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_ANGULAR }}
+#         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_ANGULAR }}
+#         aws-region: ${{ env.AWS_REGION }}
+
+#     - uses: actions/checkout@v3
+#     - name: Use Node.js
+#       uses: actions/setup-node@v3
+#       with:
+#         node-version: '16.14.x'
+
+#     - name: Run npm install
+#       run: npm install
+
+#     - name: Run cli packages
+#       run: npm install -g @angular/cli
+
+#     - name: Run Build
+#       run: ng build
+
+#     - name: Deploy to S3 bucket
+#       run: aws s3 sync ./dist s3://${{ env.S3_BUCKET }}/
+
+# jobs:
   build:
-
-    name: Build and deploy
+    name: Build Project
     runs-on: ubuntu-latest
-
     steps:
-
     - uses: actions/checkout@v3
-      name: Checkout Repository
-
-    - uses: aws-actions/configure-aws-credentials@v1
-      with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_ANGULAR }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_ANGULAR }}
-        aws-region: ${{ env.AWS_REGION }}
-
-    - uses: actions/checkout@v3
-    - name: Use Node.js
+    - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
-        node-version: '16.14.x'
+        node-version: "16.14.x"
 
     - name: Run npm install
       run: npm install
 
-    - name: Run cli packages
-      run: npm install -g @angular/cli
-
-    - name: Run Build
-      run: ng build
-
-    - name: Deploy to S3 bucket
-      run: aws s3 sync ./dist s3://${{ env.S3_BUCKET }}/
+  mocha-test-cases:
+    name: Mocha Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run Test
+        run: npm run test
