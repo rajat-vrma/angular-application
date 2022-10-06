@@ -82,6 +82,8 @@ jobs:
     name: Mocha Test
     runs-on: ubuntu-latest
     steps:
+      - name: Run cli packages
+        run: npm install -g @angular/cli
       - uses: actions/checkout@v2
       - name: Run Test
         run: npm run test
