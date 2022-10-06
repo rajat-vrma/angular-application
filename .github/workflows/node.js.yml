@@ -5,7 +5,7 @@ name: Build & Deploy Pipeline
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "masters" ]
   pull_request:
     types: [opened, synchronize, reopened]
 
@@ -25,11 +25,11 @@ jobs:
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
       - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@master
+        uses: SonarSource/sonarcloud-github-action@masters
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          
+
   build:
 
     name: Build and deploy
